@@ -19,7 +19,7 @@ body {
 
 #container {
 	margin: 20px auto;
-	max-width: 100px;
+	max-width: 600px;
 	
 }
 
@@ -35,18 +35,18 @@ h1{
 }
 
 #colorDisplay{
-	font-size: 200%;
+	font-size:  200%;
 }
 
 #stripe{
 	background: white;
 	height: 30px;
 	text-align: center;
-
+    color: black;
 }
 .selected{
 	color: white;
-	background:blue;
+	background: steelblue;
 }
 
 button{

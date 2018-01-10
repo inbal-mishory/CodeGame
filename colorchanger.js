@@ -1,19 +1,20 @@
-var numSquares=6;
-var colors= [];
-var pickedColor;
-var squares=document.querySelectorAll(".square");
-var colorDisplay=document.getElementById("colorDisplay");  
-var messageDisplay=document.querySelector("#message");
-var h1=document.querySelector("h1");
-var resetButton=document.querySelector("#reset");
-var modeButtons=document.querySelectorAll(".mode");
+var numSquares=6,
+		colors = [],
+		pickedColor,
+		squares = document.querySelectorAll(".square"),
+		colorDisplay = document.querySelector("#colorDisplay"),
+		messageDisplay = document.querySelector("#message"),
+		gameMessageDisplay = document.querySelector("#gameMessage"),
+		h1 = document.querySelector("h1"),
+		resetButton = document.querySelector("#reset"),
+		modeButtons = document.querySelectorAll(".mode");
 
 init();
 
 function init(){
 	setupModeButtons();
-    setupSquares();
-    reset()
+  setupSquares();
+  reset()
 }
 
 
@@ -38,6 +39,7 @@ function setupSquares(){
 			var clickedColor = this.style.background;
 			//compare color to pickedColor
 			if(clickedColor === pickedColor){
+				gameMessageDisplay.className = "active";
 				messageDisplay.textContent = "Correct!";
 				resetButton.textContent = "Play Again?"
 				changeColors(clickedColor);
@@ -52,35 +54,36 @@ function setupSquares(){
 
 
 function reset(){
-	colors=generateRandomColors(numSquares);
+	colors = generateRandomColors(numSquares);
 	//pick a new random color from array
-	pickedColor=pickColor();
+	pickedColor = pickColor();
 	//change color display to match picked color
-	colorDisplay.textContent=pickedColor;
-    resetButton.textContent="New Colors";
+	colorDisplay.textContent = pickedColor;
+  resetButton.textContent = "New Colors";
 	messageDisplay.textContent="";
     //change colors of square
     for(var i=0; i<squares.length;i++){
     	if(colors[i]){
-    		squares[i].style.display="block";
-    		squares[i].style.background=colors[i];
+    		squares[i].style.visibility = "visible";
+    		squares[i].style.background = colors[i];
     	}else{
-    		squares[i].style.display="none";
+    		squares[i].style.visibility = "hidden";
     	}
-    	
+
     }
 
     h1.style.background="steelblue";
 }
 
 resetButton.addEventListener("click",function(){
+	gameMessageDisplay.className = "";
 	reset();
     });
 
     h1.style.background="steelblue";
 
-    
-     
+
+
 
 function changeColors(color){
  //loop through all the squares
@@ -114,6 +117,6 @@ function randomColor(){
 	var g= Math.floor(Math.random() * 256)
 	//pick a "red" from 0-255
 	var b= Math.floor(Math.random() * 256)
-	
-	return "rgb(" + r +", " + g +", " + b +")" 
+
+	return "rgb(" + r +", " + g +", " + b +")"
 }
